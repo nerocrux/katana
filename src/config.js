@@ -52,6 +52,9 @@ config.services = {
   imgur: {
     token: '8d2e0f29107b225'
   },
+  slack: {
+    token: 'TODO: move to preferences'
+  },
 
   pomf: {
     'comfy.moe': {
