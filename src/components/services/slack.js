@@ -27,12 +27,14 @@ const config = require('../../config')
 
 module.exports = class {
   static upload (file, callback) {
-    this.setUploadInfo().then(function (channels) {
+    this.setUploadInfo().then(function ([channel, comment]) {
         console.log('Uploading image to slack...')
         
-        const token = config.services.slack.token
+        let preferencesModule = new (require('../preferences'))(this)
+        const slackToken = preferencesModule.getOption('slackToken')
+        const slackId = preferencesModule.getOption('slackId')
 
-        if (!token) {
+        if (!slackToken) {
           return callback(null, 'No authorization token found in configuration')
         }
 
@@ -51,9 +53,10 @@ module.exports = class {
 
         let form = post.form()
 
-        form.append('token', token)
-        form.append('channels', channels)
+        form.append('token', slackToken)
+        form.append('channels', channel)
         form.append('filename', 'screenshot')
+        form.append('initial_comment', comment + " by " + slackId)
         form.append('file', fs.createReadStream(file))
     }).catch(function (error) {
         console.log('Upload cancelled by user....')
@@ -104,7 +107,7 @@ module.exports = class {
             
             electronLocalshortcut.register(this.window, 'Enter', () => {
               this.window.close();
-              resolve('<user input channel>');
+              resolve(['GAZ9P61FB', '<comment>']);
             });
         }, 16);
       });

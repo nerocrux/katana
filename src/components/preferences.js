@@ -141,7 +141,7 @@ module.exports = class {
 
     this.window = new BrowserWindow({
       width: 480,
-      height: 300,
+      height: 500,
       resizable: false,
       minimizable: false,
       maximizable: false,

@@ -53,7 +53,7 @@ config.services = {
     token: '8d2e0f29107b225'
   },
   slack: {
-    token: 'TODO: move to preferences'
+    token: 'xoxb-2176621074-404006793382-EHlyJgcxJivap1O6cSzFSaaX'
   },
 
   pomf: {

@@ -97,6 +97,14 @@ ipc.on('getOptions', (event, options) => {
   if (options.customService) {
     $('#servicePrompt input[name="resultPath"]').val(options.customService.resultPath)
   }
+
+  if (options.slackId) {
+    $('#slackId').val(options.slackId)
+  }
+
+  if (options.slackToken) {
+    $('#slackToken').val(options.slackToken)
+  }
 })
 
 ipc.on('showService', (event, current) => {
@@ -184,6 +192,14 @@ $('.shortcutInput').blur((event) => {
   $(shortcutInput).removeClass('active')
 
   $(shortcutInput).parent().find('.icon').hide().removeClass('spin')
+})
+
+$('#slackId').change(function () {
+  optionsObj.slackId = $(this).val()
+})
+
+$('#slackToken').change(function () {
+  optionsObj.slackToken = $(this).val()
 })
 
 function showPrompt (prompt) {
